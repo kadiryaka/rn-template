@@ -1,0 +1,35 @@
+{
+  "welcome": "Hoşgeldiniz",
+  "router": {
+    "title": "AppLogist",
+    "back_title": "Geri"
+  },
+  "side_menu": {
+    "home": {
+      "title": "Anasayfa"
+    },
+    "corporate": {
+      "title": "Hakkımızda"
+    },
+    "login": {
+      "title": "Giriş"
+    },
+    "logout": {
+      "title": "Çıkış"
+    }
+  },
+  "messages": {
+    "success" : {
+      "login": "Giriş işlemi başarılı"
+    },
+    "warning": {
+      "login": "Doğru formatta giriniz"
+    },
+    "error": {
+      "login": "Kullanıcı adı veya şifre hatası"
+    },
+    "others": {
+      "empty_data": "Veri bulunamadı"
+    }
+  }
+}

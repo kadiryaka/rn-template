@@ -1,0 +1,35 @@
+{
+  "welcome": "Welcome",
+  "router": {
+    "title": "AppLogist",
+    "back_title": "Back"
+  },
+  "side_menu": {
+    "home": {
+      "title": "Homepage"
+    },
+    "corporate": {
+      "title": "Corporate"
+    },
+    "login": {
+      "title": "Login"
+    },
+    "logout": {
+      "title": "Logout"
+    }
+  },
+  "messages": {
+    "success" : {
+      "login": "Login success"
+    },
+    "warning": {
+      "login": "Please check username and password"
+    },
+    "error": {
+      "login": "Invalid user name or password"
+    },
+    "others": {
+      "empty_data": "Empty data"
+    }
+  }
+}
