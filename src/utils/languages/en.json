@@ -18,6 +18,16 @@
       "title": "Logout"
     }
   },
+  "bottom_tab_menu": {
+    "take_send" : {
+      "title": "Take/Send",
+      "list_title": "My Take/Send",
+      "detail_title": "Detail"
+    },
+    "about": {
+      "title": "About"
+    }
+  },
   "messages": {
     "success" : {
       "login": "Login success"

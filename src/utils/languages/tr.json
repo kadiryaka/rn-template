@@ -18,6 +18,16 @@
       "title": "Çıkış"
     }
   },
+  "bottom_tab_menu": {
+    "take_send" : {
+      "title": "Çek/Gönder",
+      "list_title": "Çekip/Gönderdiklerim",
+      "detail_title": "Detay"
+    },
+    "about": {
+      "title": "Hakkımızda"
+    }
+  },
   "messages": {
     "success" : {
       "login": "Giriş işlemi başarılı"
