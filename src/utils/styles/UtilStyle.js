@@ -3,7 +3,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 EStyleSheet.build({
 
   //color
-  $gColor: '#ca566b',
+  $gColor: '#0871b8',
   $gListHeader: '#0085C3',
   $gListItemView: '#0085C3',
 

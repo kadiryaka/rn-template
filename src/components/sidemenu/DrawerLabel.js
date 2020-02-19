@@ -1,56 +1,41 @@
-import React, { Component } from 'react';
+import React, {Component, useEffect, useState} from 'react';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import {Text} from 'react-native';
-import EStyleSheet from "react-native-extended-stylesheet";
-import {observer} from "mobx-react";
-import MenuStore from "../../utils/store/MenuStore";
 
 /**
- * visibleWhenWithoutLogin: eğer login olunmadan önce gösterilmesi gereken menü ise true verilmeli. Değiilse false
+ * Sol menude Drawer için text componentidir.
+ * @param iconName
+ * @param props
+ * @returns {*}
+ * @constructor
  */
-@observer
-export default class DrawerLabel extends Component {
+export const DrawerLabel = ({...props}) => {
+  const [title, setTitle] = useState(props.title);
+  const [focused, setFocused] = useState(props.focused);
 
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      ...props
-    };
-  }
+  useEffect(() => {
+    setFocused(props.focused);
+  }, [props.focused]);
 
-  showWithoutLogin = () => {
-    if (MenuStore.isLogin) {
-      return () => null;
-    } else {
-      return (<Text style={[styles.text, (this.props.label.focused) ? {color:'#fff'} : { color: EStyleSheet.value('$gColor')}]}> {this.props.title} </Text>);
-    }
-  }
-
-  showWithLogin = () => {
-    if (MenuStore.isLogin) {
-      return (
-        <Text style={[styles.text, (this.props.label.focused) ? {color:'#fff'} : { color: EStyleSheet.value('$gColor')}]}> {this.props.title} </Text>
-      );
-    } else {
-      return () => null;
-    }
-  }
-
-  render() {
-    if (this.props.visibleWhenWithoutLogin) {
-      return this.showWithoutLogin();
-    } else {
-      return this.showWithLogin();
-    }
-  }
-}
+  return (
+    <Text
+      style={[
+        styles.text,
+        focused ? {color: '#fff'} : {color: EStyleSheet.value('$gColor')},
+      ]}>
+      {' '}
+      {title}{' '}
+    </Text>
+  );
+};
 
 const styles = EStyleSheet.create({
   container: {
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
   },
   text: {
-    margin: 16,
-    fontWeight: 'bold',
-    fontSize: 16
-  }
+    fontWeight: '500',
+    fontSize: 16,
+  },
 });

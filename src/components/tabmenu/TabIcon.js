@@ -1,9 +1,8 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-
-export const TabIcon = ({iconName='info', ...props}) => {
+export const TabIcon = ({iconName = 'info', ...props}) => {
   const [size, setSize] = useState(props.size);
   const [icon, setIcon] = useState(iconName);
   const [focused, setFocused] = useState(props.focused);
@@ -13,7 +12,11 @@ export const TabIcon = ({iconName='info', ...props}) => {
   }, [props.focused]);
 
   return (
-    <Icon name={icon} size={size} color={(focused) ? EStyleSheet.value('$gColor') : 'gray'} />
+    <Icon
+      name={icon}
+      size={size}
+      color={focused ? EStyleSheet.value('$gColor') : 'gray'}
+    />
   );
 };
 

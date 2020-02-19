@@ -27,7 +27,6 @@ export const fetchSuccessCall = async ({
           : null;
       })
       .then(responseData => {
-        console.warn(responseData);
         resolve(
           responseData != null
             ? analyzeResponse({
@@ -65,7 +64,6 @@ export const fetchFailCall = async ({
           : null;
       })
       .then(responseData => {
-        console.warn(responseData);
         resolve(
           responseData != null
             ? analyzeResponse({

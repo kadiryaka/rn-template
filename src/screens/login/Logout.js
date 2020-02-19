@@ -1,29 +1,25 @@
-import React, { Component } from 'react';
+import React, {Component, useEffect} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {observer} from "mobx-react";
 import MenuStore from "../../utils/store/MenuStore";
 
-@observer
-export default class Logout extends Component {
+export const Logout = ({navigation, ...props}) => {
+  useEffect(() => {
+    //alert("sdfsd");
+    //MenuStore.setLogout();
+    //navigation.navigate('Corporate');
+    //this.props.navigation.navigate({ routeName: 'RouteHome'});
+    /*
+        this.props.navigation.addListener('willFocus', (route) => {
+          MenuStore.setLogout();
+          this.props.navigation.navigate({ routeName: 'RouteHome'});
+        });*/
+  }, []);
 
-  componentDidMount(): void {
-
-    MenuStore.setLogout();
-    this.props.navigation.navigate({ routeName: 'RouteHome'});
-
-    this.props.navigation.addListener('willFocus', (route) => {
-      MenuStore.setLogout();
-      this.props.navigation.navigate({ routeName: 'RouteHome'});
-    });
-
-  }
-
-  render() {
-    return (
-      <View>
-      </View>
-    );
-  }
-}
+  return (
+    <View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({});

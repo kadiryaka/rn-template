@@ -2,7 +2,7 @@ import React, {Component, useEffect, useState} from 'react';
 import {Text} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-export const TabLabel = ({ title= "", ...props }) => {
+export const TabLabel = ({title = '', ...props}) => {
   const [focused, setFocused] = useState(props.focused);
 
   // [] içerisindeki props.isFocused değiştiği zaman useEffect yeniden çalışacak demektir.
@@ -11,7 +11,11 @@ export const TabLabel = ({ title= "", ...props }) => {
   }, [props.focused]);
 
   return (
-    <Text style={[styles.text, (focused) ? {color:EStyleSheet.value('$gColor')} : { color: 'gray'}]}>
+    <Text
+      style={[
+        styles.text,
+        focused ? {color: EStyleSheet.value('$gColor')} : {color: 'gray'},
+      ]}>
       {title}
     </Text>
   );
@@ -24,5 +28,5 @@ const styles = EStyleSheet.create({
   text: {
     fontWeight: 'bold',
     fontSize: 11,
-  }
+  },
 });

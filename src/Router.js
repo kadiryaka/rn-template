@@ -3,8 +3,11 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {
+  createDrawerNavigator,
+} from '@react-navigation/drawer';
 import {observer} from "mobx-react";
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 import MenuStore from "./utils/store/MenuStore";
 import LanguageStore from "./utils/store/LanguageStore";
@@ -13,22 +16,64 @@ import {TakeSendList} from "./screens/bottomtab/takesend/TakeSendList";
 import {TabIcon} from "./components/tabmenu/TabIcon";
 import {TabLabel} from "./components/tabmenu/TabLabel";
 import About from "./screens/bottomtab/about/About";
-import {Text, View} from 'react-native';
+import RouterStyle from './utils/styles/RouterStyle';
+import {DrawerBar} from './components/sidemenu/DrawerBar';
+import {DrawerCustomComponent} from './components/sidemenu/DrawerCustomComponent';
+import {DrawerIcon} from './components/sidemenu/DrawerIcon';
+import {Login} from './screens/login/Login';
+import Corporate from './screens/corporate/CorporateHook';
+import Home from './screens/Home';
+import {DrawerLabel} from './components/sidemenu/DrawerLabel';
+import {DrawerText} from './components/sidemenu/DrawerText';
+import {DrawerSearch} from './components/sidemenu/DrawerSearch';
 
 const Tab = createBottomTabNavigator();
 const TakeSendStack = createStackNavigator();
+const HomeStack = createStackNavigator();
+const LoginStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-function TakeSendStackScreen() {
+function HomeStackScreen({ navigation }) {
   return (
-    <TakeSendStack.Navigator initialRouteName={"TakeSend"}>
-      <TakeSendStack.Screen name="TakeSend" options={{ title: LanguageStore.resource.bottom_tab_menu.take_send.title }} component={TakeSend} />
-      <TakeSendStack.Screen name="TakeSendList" options={{ title: LanguageStore.resource.bottom_tab_menu.take_send.list_title }} component={TakeSendList} />
+    <HomeStack.Navigator initialRouteName={"HomeStack"}  screenOptions = {{ headerTintColor: EStyleSheet.value('$gColor'), headerBackTitle: LanguageStore.resource.router.back_title, headerBackTitleStyle: RouterStyle.headerBackTitleStyle }} >
+      <HomeStack.Screen name="HomeStack"
+                        options={{
+                          title: LanguageStore.resource.side_menu.home.title,
+                          headerLeft: () => (<DrawerBar navigation={navigation}/>),
+                          headerRight: () => (<DrawerSearch navigation={navigation}/>),
+                          headerTitle : () => <DrawerText title={LanguageStore.resource.side_menu.home.title}/>}}
+                        component={Home} />
+    </HomeStack.Navigator>
+  );
+}
+
+function TakeSendStackScreen({ navigation }) {
+  return (
+    <TakeSendStack.Navigator initialRouteName={"TakeSend"}  screenOptions = {{ headerRight: () => (<DrawerSearch navigation={navigation}/>), headerTintColor: EStyleSheet.value('$gColor'), headerBackTitle: LanguageStore.resource.router.back_title, headerBackTitleStyle: RouterStyle.headerBackTitleStyle }} >
+      <TakeSendStack.Screen name="TakeSend"
+                            options={{
+                              headerLeft: () => (<DrawerBar navigation={navigation}/>),
+                              headerTitle : () => <DrawerText title={LanguageStore.resource.side_menu.take_send.title}/>}}
+                            component={TakeSend} />
+      <TakeSendStack.Screen name="TakeSendList" options={{ headerTitle : () => <DrawerText title={LanguageStore.resource.side_menu.take_send.list_title}/> }} component={TakeSendList} />
     </TakeSendStack.Navigator>
   );
 }
 
-function TabNavigator() {
+function LoginStackScreen({ navigation }) {
+  return (
+    <LoginStack.Navigator initialRouteName={"LoginStack"}  screenOptions = {{ headerTintColor: EStyleSheet.value('$gColor'), headerBackTitle: LanguageStore.resource.router.back_title, headerBackTitleStyle: RouterStyle.headerBackTitleStyle }} >
+      <LoginStack.Screen name="LoginStack"
+                         options={{
+                           title: LanguageStore.resource.side_menu.login.title,
+                           headerLeft: () => (<DrawerBar navigation={navigation}/>),
+                           headerTitle : () => <DrawerText title={LanguageStore.resource.side_menu.login.title}/>}}
+                         component={Login} />
+    </LoginStack.Navigator>
+  );
+}
+
+function TabNavigator({ navigation }) {
   return (
     <Tab.Navigator initialRouteName={"TakeSendTab"}>
       {MenuStore.isLogin ? <Tab.Screen name="TakeSendTab" component={TakeSendStackScreen}
@@ -53,33 +98,39 @@ function TabNavigator() {
   );
 }
 
-function HomeScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home</Text>
-    </View>
-  );
-}
-
-function NotificationsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Notification</Text>
-    </View>
-  );
-}
-
 @observer
 export default class App extends React.Component {
-    render() {
-        return (
-          <NavigationContainer>
-            <Drawer.Navigator initialRouteName="Home">
-              <Drawer.Screen name="Home" component={HomeScreen} />
-              <Drawer.Screen name="Notifications" component={NotificationsScreen} />
-              <Drawer.Screen name="Tabs" component={TabNavigator} />
-            </Drawer.Navigator>
-          </NavigationContainer>
-        )
-    }
+  render() {
+    return (
+      <NavigationContainer>
+        <Drawer.Navigator
+          initialRouteName="Home"
+          screenOptions = {{ headerTintColor: EStyleSheet.value('$gColor'), headerBackTitle: LanguageStore.resource.router.back_title, headerBackTitleStyle: RouterStyle.headerBackTitleStyle }}
+          drawerStyle={RouterStyle.drawerStyle}
+          drawerContent={props => <DrawerCustomComponent {...props} />}>
+          <Drawer.Screen
+            name="Home"
+            component={HomeStackScreen}
+            options={{ drawerLabel: ({focused}) => <DrawerLabel focused={focused} title={LanguageStore.resource.side_menu.home.title} />, drawerIcon: ({focused}) => <DrawerIcon size={25} iconName={"home"} focused={focused} /> }}
+          />
+          <Drawer.Screen
+            name="Corporate"
+            component={Corporate}
+            options={{ drawerLabel: ({focused}) => <DrawerLabel focused={focused} title={LanguageStore.resource.side_menu.corporate.title} />, drawerIcon: ({focused}) => <DrawerIcon size={25} iconName={"building"} focused={focused} /> }}
+          />
+          <Drawer.Screen
+            name="Tabs"
+            component={TabNavigator}
+            options={{ drawerLabel: ({focused}) => <DrawerLabel focused={focused} title={LanguageStore.resource.side_menu.take_send.title} />, drawerIcon: ({focused}) => <DrawerIcon size={25} iconName={"camera"} focused={focused} /> }}
+          />
+          {MenuStore.isLogin ? <></>
+            : <Drawer.Screen
+              name="Login"
+              component={LoginStackScreen}
+              options={{ drawerLabel: ({focused}) => <DrawerLabel focused={focused} title={LanguageStore.resource.side_menu.login.title} />, drawerIcon: ({focused}) => <DrawerIcon size={25} iconName={"sign-in-alt"} focused={focused} /> }}
+            />}
+        </Drawer.Navigator>
+      </NavigationContainer>
+    )
+  }
 }

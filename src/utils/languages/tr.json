@@ -11,6 +11,10 @@
     "corporate": {
       "title": "Hakkımızda"
     },
+    "take_send": {
+      "title": "İstek/Şikayet",
+      "list_title": "Liste"
+    },
     "login": {
       "title": "Giriş"
     },
@@ -20,8 +24,8 @@
   },
   "bottom_tab_menu": {
     "take_send" : {
-      "title": "Çek/Gönder",
-      "list_title": "Çekip/Gönderdiklerim",
+      "title": "İstek/Şikayet",
+      "list_title": "İstek Listem",
       "detail_title": "Detay"
     },
     "about": {

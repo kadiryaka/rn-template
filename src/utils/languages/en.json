@@ -11,6 +11,10 @@
     "corporate": {
       "title": "Corporate"
     },
+    "take_send": {
+      "title": "Suggestion",
+      "list_title": "List"
+    },
     "login": {
       "title": "Login"
     },
@@ -20,8 +24,8 @@
   },
   "bottom_tab_menu": {
     "take_send" : {
-      "title": "Take/Send",
-      "list_title": "My Take/Send",
+      "title": "Suggestion",
+      "list_title": "Sugges. List",
       "detail_title": "Detail"
     },
     "about": {
